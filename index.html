@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Улугбек — hisob-kitob</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#fbf9f4;--card:#fff;--ink:#23211c;--mut:#6b6558;--line:#d3c7a4;--g:#1f4a3d;--r:#b9503a;--on:#fbf9f4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171612;--card:#1f1e19;--ink:#f0ebdd;--mut:#a39c89;--line:#4a4535;--g:#6fc2a3;--r:#e08467;--on:#171612}}
+:root[data-theme="dark"]{--bg:#171612;--card:#1f1e19;--ink:#f0ebdd;--mut:#a39c89;--line:#4a4535;--g:#6fc2a3;--r:#e08467;--on:#171612}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 110px);overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 'Work Sans',system-ui,sans-serif;overflow-x:hidden}
+.w{max-width:640px;margin:0 auto;padding:0 16px 48px}
+button,input{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+header{display:flex;align-items:baseline;justify-content:space-between;padding:18px 0 10px}
+.logo{font:700 26px 'Spectral',Georgia,serif}.logo i{color:var(--r);font-style:normal}
+.mono{font-family:'IBM Plex Mono',monospace}
+.bar0{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;border-top:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tabs button{flex:1;min-height:42px;border:1px solid var(--line);background:transparent;border-radius:8px;font-weight:500}
+.tabs button[aria-pressed=true]{background:var(--g);border-color:var(--g);color:var(--on)}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.nav button{width:42px;height:38px;border:1px solid var(--line);background:var(--card);border-radius:8px;font-size:20px}
+.nav button:disabled{opacity:.35}
+.nav span{font:700 18px 'Spectral',Georgia,serif}
+.sum{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px}
+.box{background:var(--card);border:1px solid var(--line);padding:10px 14px;min-width:0}
+.box small{display:block;color:var(--mut);font-size:13px}
+.num{font:500 20px 'IBM Plex Mono',monospace;overflow-wrap:anywhere}
+.profit{grid-column:1/-1;border-color:var(--g)}.profit .num{font-size:30px}
+.pos{color:var(--g)}.neg{color:var(--r)}
+h2{font:700 19px 'Spectral',Georgia,serif;margin:22px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);padding:12px;margin-top:18px}
+.card h2{margin:0 0 10px}
+.seg{display:flex;gap:8px;margin-bottom:10px}.seg button{flex:1;min-height:40px;border:1px solid var(--line);background:transparent;border-radius:8px;font-weight:500}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.grid button{display:flex;flex-direction:column;align-items:center;gap:0;padding:7px 0 5px;border:1px solid var(--line);background:var(--bg);border-radius:10px;font-size:11px;line-height:1.25;min-width:0;overflow:hidden}
+.grid button span{font-size:22px}.grid button[aria-pressed=true]{border:2px solid var(--g);background:var(--card);font-weight:600}
+.ar{display:flex;gap:8px;margin-top:10px}
+#amt{flex:1;min-width:0;padding:8px 12px;border:1px solid var(--line);background:var(--bg);border-radius:8px;font:500 24px 'IBM Plex Mono',monospace}
+.go{flex:none;min-width:104px;min-height:50px;border:0;border-radius:8px;background:var(--g);color:var(--on);font-weight:600}
+.chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.chips button{min-height:36px;padding:0 11px;border:1px solid var(--line);background:var(--bg);border-radius:18px;font-size:13px}
+.chips button[aria-pressed=true]{border-color:var(--g);font-weight:600}
+.f{display:block;width:100%;min-width:0;padding:9px 12px;border:1px solid var(--line);background:var(--bg);border-radius:8px;margin-top:8px}
+.d{min-width:0;flex:1;height:36px;padding:0 8px;border:1px solid var(--line);background:var(--bg);border-radius:18px;font-size:13px}
+.ok{min-height:22px;margin-top:6px;font-size:14px;color:var(--g)}
+.ed{display:none;gap:8px;margin-top:6px}.ed button{flex:1;min-height:40px;border:1px solid var(--line);background:none;border-radius:8px}
+.ed .rm{color:var(--r);border-color:var(--r)}
+.sheet{background:var(--card);border:1px solid var(--line);padding:2px 14px}
+.cat{padding:9px 0}.cat .h{display:flex;justify-content:space-between;gap:8px}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}.bar div{height:100%;background:var(--r)}
+.day{display:flex;justify-content:space-between;padding:12px 0 2px;font-size:13px;color:var(--mut)}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:9px 0;border:0;border-bottom:1px dashed var(--line);background:none;text-align:left}
+.ic{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:19px;flex:none}
+.row .t{flex:1;min-width:0}.row .t b{display:block;font-weight:500}.row .t span{font-size:13px;color:var(--mut);overflow-wrap:anywhere}
+.amt{font:500 15px 'IBM Plex Mono',monospace;white-space:nowrap}
+.empty{padding:14px 0;color:var(--mut)}
+.lim .h{display:flex;justify-content:space-between;gap:8px;font-size:14px;margin-top:2px}
+.lim .bar{height:8px;margin-top:6px}.lim.over{border-color:var(--r)}
+details{margin-top:22px;border:1px solid var(--line);background:var(--card);padding:0 14px}
+summary{min-height:48px;display:flex;align-items:center;font-weight:500;cursor:pointer}
+details>div{padding-bottom:14px}details label{display:block;font-size:13px;color:var(--mut);margin-top:10px}
+textarea.f{height:84px;font:12px 'IBM Plex Mono',monospace;resize:vertical}
+.btns{display:flex;gap:8px;margin-top:8px}.btns button{flex:1;min-height:44px;border:1px solid var(--line);background:var(--bg);border-radius:8px;font-weight:500}
+.toast{position:fixed;left:16px;right:16px;max-width:608px;margin:0 auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:10px;display:none;justify-content:space-between;align-items:center;z-index:12}
+.toast button{background:none;border:0;color:var(--bg);font-weight:600;text-decoration:underline}
+</style></head><body><div class="w">
+<header><div class="logo">Улугбек<i> .</i></div><div id="today" class="mono" style="color:var(--mut);font-size:14px"></div></header>
+<div class="bar0"><div class="tabs" id="tabs"><button data-p="day">Kun</button><button data-p="week">Hafta</button><button data-p="month">Oy</button></div>
+<div class="nav"><button id="pv" aria-label="Oldingi">‹</button><span id="lab"></span><button id="nx" aria-label="Keyingi">›</button></div></div>
+<div class="sum"><div class="box profit"><small>Foyda</small><div class="num" id="pro">0</div></div>
+<div class="box"><small>Daromad</small><div class="num pos" id="inc">0</div></div><div class="box"><small>Xarajat</small><div class="num neg" id="exp">0</div></div></div>
+
+<div class="box lim" id="lm" style="display:none;margin-top:8px"></div>
+<div class="card" id="fc">
+<div class="seg" id="sg"><button data-t="exp">Xarajat</button><button data-t="inc">Daromad</button></div>
+<h2 id="ft">Nimaga sarfladim?</h2>
+<div class="grid" id="gr"></div>
+<div class="ar"><input id="amt" inputmode="numeric" placeholder="Summa" autocomplete="off" aria-label="Summa, so'm"><button class="go" id="sv">Qo'shish</button></div>
+<div class="chips" id="qc"><button data-a="10000">+10 000</button><button data-a="50000">+50 000</button><button data-a="100000">+100 000</button><button data-a="0">Tozalash</button></div>
+<input class="f" id="note" placeholder="Izoh (ixtiyoriy)" aria-label="Izoh">
+<div class="chips" id="dc"><button data-d="0">Bugun</button><button data-d="1">Kecha</button><input class="d" id="date" type="date" aria-label="Sana"></div>
+<div class="ok" id="ok" aria-live="polite"></div>
+<div class="ed" id="ed"><button class="rm" id="dl">O'chirish</button><button id="cl">Bekor qilish</button></div>
+</div>
+
+<h2>Sarflaganlarim</h2><div class="sheet" id="cats"></div>
+<h2>Tarix</h2><div class="sheet" id="list"></div>
+<details><summary>Oylik limit</summary><div><label for="lmi">Oylik xarajat limiti, so'm</label><input class="f" id="lmi" inputmode="numeric" placeholder="Masalan, 3 000 000"></div></details>
+</div>
+<div class="toast" id="ts"><span>Yozuv o'chirildi</span><button id="tu">Qaytarish</button></div>
+<script>
+var C={exp:[['taksi','🚕','Taksi'],['oziq','🍞','Oziq-ovqat'],['ijara','🏠','Ijara'],['kommunal','💡','Kommunal'],['telefon','📱','Telefon'],['yoqilgi','⛽','Yoqilg\'i'],['kiyim','👕','Kiyim'],['salomat','💊','Salomatlik'],['boshqa','🧾','Boshqa']],
+inc:[['maosh','💼','Maosh'],['savdo','🛒','Savdo'],['sovga','🎁','Sovg\'a'],['qoshimcha','💰','Boshqa']]};
+var MO=['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
+var KEY='ulugbek-hisob',lim=0,tx=[],per='day',off=0,$=function(i){return document.getElementById(i)};
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function D(s){var a=s.split('-');return new Date(+a[0],a[1]-1,+a[2])}
+function add(s,n){var d=D(s);d.setDate(d.getDate()+n);return iso(d)}
+var T=iso(new Date());
+try{tx=JSON.parse(localStorage.getItem(KEY)||'[]')||[]}catch(e){tx=[]}
+try{lim=+localStorage.getItem(KEY+'-lim')||0}catch(e){}
+try{per=localStorage.getItem(KEY+'-p')||'day'}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(tx));localStorage.setItem(KEY+'-p',per)}catch(e){}}
+function find(t,c){var a=C[t];for(var i=0;i<a.length;i++)if(a[i][0]==c)return a[i];return a[a.length-1]}
+function money(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function short(s){var a=s.split('-');return a[2]+'.'+a[1]}
+function sgn(n){return(n<0?'−':'')+money(Math.abs(n))}
+function rng(p,o){var s,e;if(p=='day'){e=s=add(T,-o)}else if(p=='week'){s=add(T,-((D(T).getDay()+6)%7)-7*o);e=add(s,6)}else{var d=new Date(D(T).getFullYear(),D(T).getMonth()-o,1);s=iso(d);e=iso(new Date(d.getFullYear(),d.getMonth()+1,0))}return[s,e]}
+function dd(){return add(T,-(per=='day'?off:0))}
+function render(){
+var r=rng(per,off),s=r[0],e=r[1],L=tx.filter(function(x){return x.date>=s&&x.date<=e}).sort(function(a,b){return b.date<a.date?-1:b.date>a.date?1:b.id-a.id});
+document.querySelectorAll('#tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.p==per)});
+var LL=L;
+var mr=rng('month',0),me=0;tx.forEach(function(t){if(t.type=='exp'&&t.date>=mr[0]&&t.date<=mr[1])me+=t.amt});
+if(lim>0){var lf=lim-me;$('lm').style.display='block';$('lm').className='box lim'+(lf<0?' over':'');$('lm').innerHTML='<small>Oylik limit</small><div class="h"><span>Sarflandi '+money(me)+' / '+money(lim)+'</span><b class="'+(lf<0?'neg':'pos')+'">'+(lf<0?'Oshdi: '+money(-lf):'Qoldi: '+money(lf))+'</b></div><div class="bar"><div style="width:'+Math.min(100,me/lim*100)+'%"></div></div>'}else $('lm').style.display='none';
+$('lab').textContent=per=='month'?MO[D(s).getMonth()]+' '+D(s).getFullYear():per=='day'?(off==0?'Bugun':off==1?'Kecha':short(s)):short(s)+' – '+short(e);
+$('nx').disabled=off==0;
+var i=0,x=0,by={};L.forEach(function(y){if(y.type=='inc')i+=y.amt;else{x+=y.amt;by[y.cat]=(by[y.cat]||0)+y.amt}});
+var p=i-x;$('inc').textContent=money(i);$('exp').textContent=money(x);
+$('pro').textContent=sgn(p)+' so\'m';$('pro').className='num '+(p<0?'neg':'pos');
+var ks=Object.keys(by).sort(function(a,b){return by[b]-by[a]});
+$('cats').innerHTML=ks.length?ks.map(function(k){var c=find('exp',k);return '<div class="cat"><div class="h"><span>'+c[1]+' '+c[2]+' <small style="color:var(--mut)">'+Math.round(by[k]/x*100)+'%</small></span><span class="amt">'+money(by[k])+'</span></div><div class="bar"><div style="width:'+by[k]/x*100+'%"></div></div></div>'}).join(''):'<div class="empty">Bu davrda xarajat yo\'q.</div>';
+var h='',last='';
+LL.forEach(function(y){if(y.date!=last){last=y.date;var d=0;L.forEach(function(z){if(z.date==last)d+=z.type=='inc'?z.amt:-z.amt});h+='<div class="day"><span>'+(y.date==T?'Bugun':y.date==add(T,-1)?'Kecha':short(y.date))+'</span><span class="mono">'+sgn(d)+'</span></div>'}
+var c=find(y.type,y.cat);h+='<button class="row" data-id="'+y.id+'"><div class="ic" aria-hidden="true">'+c[1]+'</div><div class="t"><b>'+c[2]+'</b>'+(y.note?'<span>'+esc(y.note)+'</span>':'')+'</div><div class="amt '+(y.type=='inc'?'pos':'neg')+'">'+(y.type=='inc'?'+':'−')+money(y.amt)+'</div></button>'});
+$('list').innerHTML=h||'<div class="empty">Hali yozuv yo\'q. Tepadan kategoriyani tanlang.</div>'}
+var ed=null,ty='exp',sel='taksi';
+function paint(){document.querySelectorAll('#sg button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t==ty)});
+$('ft').textContent=ty=='exp'?'Nimaga sarfladim?':'Nima topdim?';
+$('gr').innerHTML=C[ty].map(function(c){return '<button data-c="'+c[0]+'" aria-pressed="'+(c[0]==sel)+'"><span>'+c[1]+'</span>'+c[2]+'</button>'}).join('');
+$('sv').textContent=ed?'Saqlash':'Qo\'shish';$('ed').style.display=ed?'flex':'none';
+document.querySelectorAll('#dc button').forEach(function(b){b.setAttribute('aria-pressed',$('date').value==add(T,-b.dataset.d))})}
+function reset(){ed=null;$('amt').value='';$('note').value='';$('date').value=dd();paint()}
+$('sg').onclick=function(e){var b=e.target.closest('button');if(!b)return;ty=b.dataset.t;sel=C[ty][0][0];paint()};
+$('gr').onclick=function(e){var b=e.target.closest('button');if(!b)return;sel=b.dataset.c;paint();$('amt').focus()};
+$('amt').oninput=function(){var v=this.value.replace(/\D/g,'');this.value=v?money(+v):''};
+$('amt').onkeydown=function(e){if(e.key=='Enter')$('sv').click()};
+function av(){return +$('amt').value.replace(/\s/g,'')||0}
+$('qc').onclick=function(e){var b=e.target.closest('button');if(!b)return;var a=+b.dataset.a;$('amt').value=a?money(av()+a):'';$('amt').focus()};
+$('dc').onclick=function(e){var b=e.target.closest('button');if(b){$('date').value=add(T,-b.dataset.d);paint()}};
+$('date').onchange=paint;
+var okt;
+$('sv').onclick=function(){var a=av();if(a<=0){$('amt').focus();return}
+var o={id:ed||Date.now(),type:ty,cat:sel,amt:a,note:$('note').value.trim(),date:$('date').value||T};
+var was=ed;if(ed)tx=tx.map(function(t){return t.id==ed?o:t});else tx.push(o);save();
+var c=find(ty,sel);reset();render();
+$('ok').textContent='✓ '+c[1]+' '+c[2]+' — '+money(a)+(was?' saqlandi':' yozildi');clearTimeout(okt);okt=setTimeout(function(){$('ok').textContent=''},3000)};
+$('cl').onclick=function(){reset()};
+var bin=null,tm;
+$('dl').onclick=function(){bin=tx.filter(function(t){return t.id==ed})[0];tx=tx.filter(function(t){return t.id!=ed});save();reset();render();$('ts').style.display='flex';clearTimeout(tm);tm=setTimeout(function(){$('ts').style.display='none'},5000)};
+$('tu').onclick=function(){if(bin){tx.push(bin);bin=null;save();render()}$('ts').style.display='none'};
+$('list').onclick=function(e){var b=e.target.closest('.row');if(!b)return;var x=tx.filter(function(t){return t.id==b.dataset.id})[0];if(!x)return;
+ed=x.id;ty=x.type;sel=x.cat;$('amt').value=money(x.amt);$('note').value=x.note;$('date').value=x.date;paint();$('ok').textContent='';$('fc').scrollIntoView({behavior:'smooth',block:'start'})};
+$('tabs').onclick=function(e){var b=e.target.closest('button');if(!b)return;per=b.dataset.p;off=0;save();if(!ed)$('date').value=dd();paint();render()};
+$('pv').onclick=function(){off++;if(!ed)$('date').value=dd();paint();render()};$('nx').onclick=function(){if(off>0){off--;if(!ed)$('date').value=dd();paint();render()}};
+$('lmi').value=lim?money(lim):'';
+$('lmi').oninput=function(){var v=this.value.replace(/\D/g,'');this.value=v?money(+v):'';lim=+v||0;try{localStorage.setItem(KEY+'-lim',lim)}catch(e){}render()};
+$('today').textContent=T.split('-').reverse().join('.');reset();render();
+</script></body></html>
